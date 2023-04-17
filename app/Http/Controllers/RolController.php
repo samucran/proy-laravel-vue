@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Rose;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Iluminate\Support\Facades\BD;
 
@@ -23,7 +23,7 @@ class RolController extends Controller
     public function index()
     {
         $roles =Role::all();
-        return view('roles.index,',['roles'->$roles]);
+        return view('roles.index',['roles'=>$roles]);
     }
 
     /**
@@ -31,8 +31,8 @@ class RolController extends Controller
      */
     public function create()
     {
-        $permission=Permission::get();
-        return view('roles.crear');
+        $permission=Permission::all()->pluck(value:'name',key:'id');
+        return view('roles.create',compact('permission'));
     }
 
     /**
@@ -41,9 +41,10 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,['name'=>'required','permission'=>'required']);
-        $role= Role::create(['name'=>$request->input('permision')]);
-        $role->sycPermissions($request->input('permission'));
-        return redirect()->route('roles.index'):
+
+        $role= Role::create($request->only('name'));
+        $role->sycPermissions($request->input('permission',[]));
+        return redirect()->route('roles.index');
 
 
     }
@@ -63,7 +64,7 @@ class RolController extends Controller
     {
         $role = Role::find($id);
         $permission=Permission::get();
-        $rolePermission=DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id);
+        $rolePermission=DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
         ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
         ->all();
         return view('roles.editar',compact('role','permission','rolePermissions'));
@@ -75,6 +76,7 @@ class RolController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request,['name'=>'required','permission'=>'required']);
+        
         $role= Role::find($id);
         $role->name=$request->input('name');
         $role->save();
