@@ -10,7 +10,7 @@
     <main>
         <div class="row">
             <div class="from-group">
-                <label for="name">Articulo</label>
+                <label for="name">Nombre</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ $category->name }}">
                 <div class="row form-group">
                     <label for="description">Contenido</label>

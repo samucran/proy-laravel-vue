@@ -1,8 +1,8 @@
 @extends('dashboard.master')
-@section('titulo','EditarPost')
+@section('titulo','EditarAsignatura')
 @section('contenido')
 @include('dashboard.partials.validation-error')
-<h1>Editar post</h1>
+<h1>Editar asignatura</h1>
 
 <form action="{{ url('dashboard/post'.$post->id) }}" method="POST">
     @method("PUT")
@@ -10,16 +10,25 @@
     <main>
         <div class="row">
             <div class="from-group">
-                <label for="name">Articulo</label>
+                <label for="name">Nombre</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ $post->name }}">
                 <div class="row form-group">
-                    <label for="description">Contenido</label>
+                    <label for="description">Descripcion</label>
                     <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ $post->description }}</textarea>
                 </div>
+                <div class="from-group">
+                    <label for="string">Nombre docente</label>
+                    <input type="text" class="form-control" name="string" id="string">
+                </div>
+                <div class="from-group">
+                    <label for="string">Numero de creditos</label>
+                    <input type="text" class="form-control" name="int" id="int">
+                </div>
+                
                 <div class="row form-group">
-                    <label for="description">Categoria</label>
+                    <label for="description">Asignatura pre requisitos</label>
                     <select name="category" id="category">
-                        <option value="">Selecciona una categoria</option>
+                        <option value="">Selecciona asignatura pre</option>
                         @foreach ($category as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                             

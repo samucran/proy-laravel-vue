@@ -41,7 +41,7 @@ class PostController extends Controller
         $post->description=$request->input('description');
         $post->category_id=$request->input('category');
         $post->save();
-        return view("dashboard.post.message",['msg'=>"Publicacion creada con exito"]);
+        return view("dashboard.post.message",['msg'=>"Asignatura creada con exito"]);
     }
 
     /**
@@ -75,7 +75,7 @@ class PostController extends Controller
         $post->description=$request->input('description');
         $post->category_id=$request->input('category');
         $post->save();
-        return view("dashboard.post.message",['msg'=>"Publicacion modificada con exito"]);
+        return view("dashboard.post.message",['msg'=>"Asignatura modificada con exito"]);
     }
 
     /**

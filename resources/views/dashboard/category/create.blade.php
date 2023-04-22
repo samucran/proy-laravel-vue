@@ -2,14 +2,14 @@
 @section('titulo','AgregarCatgoria')
 @section('contenido')
 @include('dashboard.partials.validation-error')
-<h1>Registrar categoria</h1>
+<h1>Registrar pre asignatura</h1>
 
 <form action="{{ route('category.store') }}" method="POST">
     @csrf
     <main>
         <div class="row">
             <div class="from-group">
-                <label for="name">Articulo</label>
+                <label for="name">Nombre</label>
                 <input type="text" class="form-control" name="name" id="name">
                 <div class="row form-group">
                     <label for="description">Contenido</label>
